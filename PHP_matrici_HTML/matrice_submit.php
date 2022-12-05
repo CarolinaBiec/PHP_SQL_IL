@@ -14,7 +14,7 @@ if(!isset($_SESSION['valori']))
 {	
    // viene creata e azzerata 
    // la matrice di appoggio per i valori
-   $_SESSION['valori'] = Array();
+   $_SESSION['valori'] = array();
    for($j=0;$j<$r;$j++)
    {
       for($i=0;$i<$c;$i++)

@@ -6,7 +6,7 @@ $c=5;
 
 // viene creata e azzerata 
 // la matrice di appoggio per i valori
-$valori = Array();
+$valori = array();
 for($j=0;$j<$r;$j++)
 {
    for($i=0;$i<$c;$i++)
@@ -17,21 +17,23 @@ for($j=0;$j<$r;$j++)
 
 // viene percorsa l'intera matrice di appoggio
 // elemento per elemento
+
+// se premuto rigenera ogni elemento viene rigenerato 
+if(isset($_POST['R'])) {
+   for($j=0;$j<$r;$j++) {
+      for($i=0;$i<$c;$i++) {
+         $valori[$j][$i]=rand(1,99);
+	  }
+   } 	  
+}	 
+
+// se premuto somma ogni elemento viene conservato e sommato
 $somma=0;
-for($j=0;$j<$r;$j++)
-{
-   for($i=0;$i<$c;$i++)
-   {
-	  // se premuto rigenera ogni elemento viene rigenerato 
-      if(isset($_POST['R']))
-      {
-         $valori[$j][$i]=mt_rand(1,99);
-	  }	 
-	  // se premuto somma ogni elemento viene conservato e sommato
-      if(isset($_POST['S']))
-      {
-		  $valori[$j][$i]=$_POST['T'][$j][$i];
-		  $somma = $somma + $valori[$j][$i];
+if(isset($_POST['S'])) {
+   for($j=0;$j<$r;$j++) {
+      for($i=0;$i<$c;$i++) {
+		 $valori[$j][$i]=$_POST['T'][$j][$i];
+		 $somma = $somma + $valori[$j][$i];
 	  }	  
    } 
 }

@@ -6,7 +6,7 @@ $c=5;
 
 // viene creata e azzerata 
 // la matrice di appoggio per i valori
-$valori = Array();
+$valori = array();
 for($j=0;$j<$r;$j++)
 {
    for($i=0;$i<$c;$i++)
@@ -15,6 +15,7 @@ for($j=0;$j<$r;$j++)
    } 
 }
 
+// ho premuto uno dei bottoni B
 if(isset($_POST['B']))
 {	
    for($j=0;$j<$r;$j++)

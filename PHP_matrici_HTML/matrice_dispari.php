@@ -16,17 +16,17 @@ if(!isset($_SESSION['valori']))
 {	
    // viene creata e azzerata 
    // la matrice di appoggio per i valori
-   $_SESSION['valori'] = Array();
+   $_SESSION['valori'] = array();
    
    // matrice per i numeri casuali
-   $_SESSION['numeri'] = Array();
+   $_SESSION['numeri'] = array();
    
    for($j=0;$j<$r;$j++)
    {
       for($i=0;$i<$c;$i++)
       {
         $_SESSION['valori'][$j][$i]=0;
-        $_SESSION['numeri'][$j][$i]=mt_rand(1,99);
+        $_SESSION['numeri'][$j][$i]=rand(1,99);
       } 
    }
 }
