@@ -1,0 +1,186 @@
+-----------
+
+CREATE DATABASE esempio;
+
+USE esempio;
+
+CREATE TABLE Rubrica (
+nome VARCHAR(30) NOT NULL,
+cognome VARCHAR(30) NOT NULL,
+telefono INT(10)
+);
+
+DESCRIBE Rubrica;
+
+INSERT INTO Rubrica 
+(nome, cognome, telefono) 
+VALUES
+('Marco','Paiola',342342445);
+
+SELECT * FROM Rubrica;
+
+SELECT cognome,nome FROM Rubrica;
+
+
+-----------
+
+CREATE DATABASE conto;
+
+USE conto;
+
+CREATE TABLE movimenti (
+titolare VARCHAR(30) NOT NULL,
+tipo CHAR(1) NOT NULL,
+importo NUMERIC(10,2) NOT NULL,
+giorno INT NOT NULL,
+mese INT NOT NULL
+);
+
+DESCRIBE movimenti;
+
+SELECT * FROM movimenti;
+
+INSERT INTO movimenti 
+(titolare,tipo,importo,giorno,mese)
+VALUES
+('XYZ','A',789.43,21,2);
+
+INSERT INTO movimenti 
+(titolare,tipo,importo,giorno,mese)
+VALUES
+('XYZ','P',100.00,21,2),
+('ABCD','A',356.60,19,2),
+('XYZ','P',150.00,22,2),
+('ABCD','P',23.56,20,2),
+('ABCD','P',100.00,21,2);
+
+SELECT titolare,tipo FROM movimenti;
+SELECT giorno,mese,importo FROM movimenti;
+
+SELECT * FROM movimenti WHERE titolare='XYZ';
+SELECT * FROM movimenti WHERE giorno=21;
+
+SELECT * FROM movimenti 
+WHERE importo>500.00 AND tipo='A';
+
+SELECT * FROM movimenti 
+WHERE giorno=21 OR giorno=22;
+
+SELECT * FROM movimenti 
+WHERE (giorno=21 OR giorno=22) AND tipo='P';
+
+
+-----------
+
+CREATE DATABASE abbigliamento;
+
+USE abbigliamento;
+
+CREATE TABLE capi (
+tipo_capo VARCHAR(30) NOT NULL,
+prezzo NUMERIC(10,2) NOT NULL,
+sconto INT(3)
+);
+
+INSERT INTO capi 
+(tipo_capo,prezzo,sconto) 
+VALUES
+('felpa blu',34.80,20),
+('camicia lino azzurra',60.00,22),
+('giacca grigia',78.40,15),
+('jeans',50.20,0),
+('maglietta verde',15.67,33);
+
+SELECT * FROM capi;
+
+SELECT tipo_capo,prezzo-(prezzo*sconto/100) FROM capi;
+
+SELECT tipo_capo,prezzo-(prezzo*sconto/100) AS prezzo_scontato FROM capi;
+
+SELECT tipo_capo,prezzo,sconto,prezzo-(prezzo*sconto/100) 
+AS prezzo_scontato FROM capi;
+
+USE ESEMPIO;
+SHOW TABLES;
+
+CREATE TABLE RubricaBis (
+ID_RubricaBis INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(30) NOT NULL,
+cognome VARCHAR(30) NOT NULL,
+telefono INT(10)
+);
+
+INSERT INTO RubricaBis 
+(nome, cognome, telefono) 
+VALUES
+('Marco','Paiola',342342445);
+
+INSERT INTO RubricaBis 
+(nome, cognome, telefono) 
+VALUES
+('Giuseppe','Verdi',34645445),
+('Mario','Bianchi',34645755),
+('Franco','Rossi',34624357);
+
+DELETE FROM RubricaBis;
+INSERT INTO RubricaBis
+ 
+(ID_RubricaBis,nome, cognome, telefono) 
+VALUES
+(1,'Marco','Paiola',342342445);
+
+INSERT INTO RubricaBis 
+(ID_RubricaBis,nome, cognome, telefono) 
+VALUES
+(7,'Marco','Paiola',342342445);
+
+
+-----------
+
+CREATE DATABASE dati;
+
+USE dati;
+
+CREATE TABLE esempio (
+valori NUMERIC(10,2) NOT NULL
+);
+
+INSERT INTO esempio 
+(valori) 
+VALUES
+(5.67),
+(10.56),
+(12.00),
+(2.04),
+(25.33),
+(12.15);
+
+SELECT AVG(valori) AS media FROM esempio;
+SELECT MIN(valori) AS minimo FROM esempio;
+SELECT MAX(valori) AS massimo FROM esempio;
+SELECT SUM(valori) AS somma FROM esempio;
+SELECT COUNT(valori) AS conta FROM esempio;
+
+SELECT SUM(valori) AS somma FROM esempio
+WHERE valori < 10;
+
+CREATE TABLE esempio2 (
+km INT NOT NULL,
+litri NUMERIC(10,2) NOT NULL
+);
+
+INSERT INTO esempio2 
+(km,litri) 
+VALUES
+(300,45.67),
+(230,23.05),
+(343,34.12),
+(123,18.21);
+
+SELECT km,litri,km/litri AS km_per_litro FROM esempio2;
+SELECT MIN(km/litri) AS consumo_maggiore FROM esempio2;
+
+SELECT km,litri,litri/km AS litri_per_km FROM esempio2;
+SELECT MAX(litri/km) AS consumo_minore FROM esempio2;
+
+
