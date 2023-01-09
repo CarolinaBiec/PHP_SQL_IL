@@ -1,0 +1,27 @@
+SELECT fornitori.Nome, articoli.Codice, articoli.Prezzo 
+FROM articoli INNER JOIN fornitori 
+ON articoli.ID_Forn=fornitori.ID_Forn;
+
+SELECT fornitori.Nome, articoli.Codice, articoli.Prezzo 
+FROM fornitori INNER JOIN articoli
+ON fornitori.ID_Forn=articoli.ID_Forn;
+
+SELECT fornitori.Nome, articoli.Codice, articoli.Prezzo 
+FROM articoli INNER JOIN fornitori 
+ON articoli.ID_Forn=fornitori.ID_Forn 
+ORDER BY articoli.Codice;
+
+SELECT fornitori.Nome, articoli.Codice, articoli.Prezzo 
+FROM articoli INNER JOIN fornitori 
+ON articoli.ID_Forn=fornitori.ID_Forn 
+ORDER BY fornitori.Nome;
+
+SELECT fornitori.Nome, articoli.Codice, articoli.Prezzo 
+FROM articoli INNER JOIN fornitori 
+ON articoli.ID_Forn=fornitori.ID_Forn
+WHERE fornitori.ID_Forn=2;
+
+SELECT fornitori.Nome, articoli.Codice, articoli.Prezzo 
+FROM articoli INNER JOIN fornitori 
+ON articoli.ID_Forn=fornitori.ID_Forn
+WHERE fornitori.Nome='Ubras';

@@ -1,0 +1,13 @@
+CREATE TABLE Fornitori (
+   ID_Forn INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   Nome VARCHAR(20) NOT NULL,
+   Sconto INT(2) NOT NULL);
+
+LOAD DATA INFILE "fornitori.txt"
+   INTO TABLE Fornitori
+   FIELDS
+   TERMINATED BY ','
+   ENCLOSED BY '"'
+   LINES 
+   TERMINATED BY '\r\n'
+   (ID_Forn, Nome, Sconto);

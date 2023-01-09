@@ -1,0 +1,161 @@
+
+CREATE DATABASE banca;
+USE banca;
+
+CREATE TABLE movimenti (
+ID_movimenti INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+cliente VARCHAR(20) NOT NULL,
+importo INT NOT NULL 
+);
+
+INSERT INTO movimenti 
+(cliente,importo) 
+VALUES
+('B',20),
+('A',50),
+('A',-30),
+('C',100),
+('B',-40),
+('A',-10);
+
+SELECT SUM(importo) AS saldo
+FROM movimenti;
+
+SELECT cliente,SUM(importo) AS saldo
+FROM movimenti
+GROUP BY cliente;
+
+SELECT cliente,COUNT(ID_movimenti) AS n_mov
+FROM movimenti
+GROUP BY cliente;
+
+-- caso: massimo importo tra tutti i clienti
+SELECT MAX(importo) AS massimo FROM movimenti;
+
+-- caso sbagliato: massimo importo tra tutti i clienti
+SELECT cliente,MAX(importo) AS massimo FROM movimenti;
+-- il cliente è disallineato (non è quello che ha il massimo importo)
+
+-- caso: massimo importo di uno specifico cliente
+SELECT cliente,MAX(importo) AS massimo FROM movimenti 
+WHERE cliente='B';
+
+-- caso: massimo importo per ciascun cliente
+SELECT cliente,MAX(importo) AS massimo FROM movimenti 
+GROUP BY cliente;
+
+-- caso: massimo importo tra tutti i clienti con associato il cliente giusto
+SELECT cliente,MAX(importo) AS massimo  FROM movimenti 
+GROUP BY cliente 
+ORDER BY massimo DESC 
+LIMIT 1;
+
+------------
+
+CREATE TABLE salti (
+ID_salti INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+atleta VARCHAR(20) NOT NULL,
+misura NUMERIC(5,2) NOT NULL 
+);
+
+INSERT INTO salti 
+(atleta,misura)
+VALUES
+('A',6.43),
+('B',7.15),
+('C',7.56),
+('A',6.98),
+('D',7.05),
+('C',7.56),
+('B',7.31),
+('A',6.67),
+('D',7.33);
+
+SELECT atleta,MAX(misura) AS massimo  
+FROM salti 
+GROUP BY atleta 
+ORDER BY massimo DESC 
+LIMIT 1;
+
+------------
+
+CREATE TABLE lavoratori (
+ID_lavoratori INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+provincia CHAR(2) NOT NULL,
+titolo CHAR(3) NOT NULL,
+nominativo VARCHAR(50)
+);
+
+INSERT INTO lavoratori 
+(provincia,titolo,nominativo) 
+VALUES
+('TO','MED','Rossi'),
+('AL','LB','Verdi'),
+('BI','DIP','Martini'),
+('VC','LB','Russo'),
+('VC','LB','Giovannini'),
+('TO','DIP','Ranocchia'),
+('AT','LM','Ronaldo'),
+('CN','MED','Totti'),
+('AT','LM','Fuser'),
+('VB','DIP','Padelli'),
+('TO','LM','Dybala'),
+('AL','LB','Mbappè'),
+('NO','MED','Cavani'),
+('NO','LM','Milito'),
+('VC','LB','Pato'),
+('CN','LB','Dida'),
+('NO','MED','Montero'),
+('AT','LB','Zidane'),
+('NO','DIP','Buffon'),
+('BI','LM','Nedved'),
+('VB','MED','Icardi'),
+('BI','MED','Benzema'),
+('VB','LM','Belotti'),
+('CN','LM','Zaza'),
+('AT','DIP','Zanetti'),
+('VB','LM','Federer'),
+('TO','LB','Nadal'),
+('BI','MED','Djokovic'),
+('BI','DIP','Williams'),
+('VC','DIP','Dovizioso'),
+('VC','LM','Valentino'),
+('TO','DIP','Higuain'),
+('AT','MED','Bonucci'),
+('CN','DIP','Iannone');
+
+SELECT provincia,COUNT(ID_lavoratori) AS totale 
+FROM lavoratori 
+GROUP BY provincia;
+
+SELECT titolo,COUNT(ID_lavoratori) AS totale 
+FROM lavoratori 
+GROUP BY titolo;
+
+SELECT provincia,titolo,COUNT(ID_lavoratori) AS totale 
+FROM lavoratori 
+GROUP BY provincia, titolo;
+
+SELECT titolo,provincia,COUNT(ID_lavoratori) AS totale 
+FROM lavoratori 
+GROUP BY titolo,provincia;
+
+--- elimina dati ma non resetta PK
+DELETE FROM nometabella;
+
+--- elimina dati e resetta PK
+TRUNCATE TABLE nometabella;
+
+-- con i raggruppamenti per i filtri si usa HAVING (e non WHERE)
+SELECT provincia,titolo,COUNT(ID_lavoratori) AS totale 
+FROM lavoratori 
+GROUP BY provincia, titolo 
+HAVING provincia='AL' OR provincia='AT';
+
+-- filtri per contenuti parziali
+SELECT * FROM lavoratori WHERE nominativo LIKE 'R%';
+SELECT * FROM lavoratori WHERE nominativo LIKE '%ti';
+SELECT * FROM lavoratori WHERE nominativo LIKE '%er%';
+
+
+
