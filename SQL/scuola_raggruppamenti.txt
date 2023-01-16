@@ -1,0 +1,97 @@
+
+
+CREATE TABLE Studenti (
+   ID_Studenti INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   nome VARCHAR(30) NOT NULL,
+   cognome VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE Voti (
+   ID_Voti INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   datavoto DATE NOT NULL,
+   voto NUMERIC(5,2),
+   ID_Studenti INT NOT NULL
+);
+  
+INSERT INTO Studenti
+(ID_Studenti, nome, cognome) 
+VALUES 
+(1,"Gianni","Rossi"),      
+(2,"Mario","Bianchi"),      
+(3,"Maria Teresa","Verdi"),      
+(4,"Paola","Viola"),      
+(5,"Ugo","Neri")
+
+INSERT INTO Voti      
+(datavoto,voto,ID_Studenti)
+VALUES
+(20230115,5.75,3),
+(NOW(),6.50,2),
+(20230230,7.00,2),
+(20230114,-4.00,3),
+(20230114,14.00,3),
+(20230114,7.25,1),
+(20230115,7,4)
+
+INSERT INTO Voti      
+(datavoto,voto,ID_Studenti)
+VALUES
+(20230113,345,3),
+(20230114,-234,4)
+
+INSERT INTO Voti      
+(datavoto,voto,ID_Studenti)
+VALUES
+(20230113,123456.789,3)
+
+INSERT INTO Voti      
+(datavoto,voto,ID_Studenti)
+VALUES
+(20230115,4.50,5),
+(20230116,6.25,5),
+(20230113,8.50,3),
+(20230114,7.75,3)
+
+SELECT Studenti.nome, Studenti.cognome, Voti.voto
+FROM Voti
+INNER JOIN Studenti ON Voti.ID_Studenti=Studenti.ID_Studenti
+
+SELECT Studenti.nome, Studenti.cognome, Voti.voto
+FROM Studenti
+INNER JOIN Voti ON Studenti.ID_Studenti=Voti.ID_Studenti
+
+SELECT Studenti.nome, Studenti.cognome, Voti.voto
+FROM Studenti
+LEFT JOIN Voti ON Studenti.ID_Studenti=Voti.ID_Studenti
+
+SELECT Studenti.nome, Studenti.cognome, Voti.voto
+FROM Voti
+INNER JOIN Studenti ON Voti.ID_Studenti=Studenti.ID_Studenti
+WHERE Studenti.ID_Studenti=3;
+
+-----
+
+SELECT Studenti.nome, Studenti.cognome, AVG(Voti.voto) AS Media
+FROM Voti
+INNER JOIN Studenti ON Voti.ID_Studenti=Studenti.ID_Studenti
+GROUP BY Studenti.ID_Studenti
+
+SELECT Studenti.nome, Studenti.cognome, AVG(Voti.voto) AS Media
+FROM Voti
+RIGHT JOIN Studenti ON Voti.ID_Studenti=Studenti.ID_Studenti
+GROUP BY Studenti.ID_Studenti
+
+SELECT Studenti.nome, Studenti.cognome, COUNT(Voti.voto) AS QuantiVoti
+FROM Voti
+RIGHT JOIN Studenti ON Voti.ID_Studenti=Studenti.ID_Studenti
+GROUP BY Studenti.ID_Studenti
+
+SELECT Studenti.nome, Studenti.cognome, COUNT(Voti.voto) AS QuantiVoti
+FROM Voti
+RIGHT JOIN Studenti ON Voti.ID_Studenti=Studenti.ID_Studenti
+GROUP BY Studenti.ID_Studenti
+HAVING QuantiVoti=0
+
+
+
+   

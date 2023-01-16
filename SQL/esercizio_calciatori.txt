@@ -1,0 +1,72 @@
+Creare due tabelle relazionate Calciatori e Partite
+Nella tabella Calciatori ci dovranno essere il nome, il cognome, il numero di maglia.
+Nella tabella Partite la descrizione, il numero di reti segnate da uno specifico  calciatore.
+
+Dovranno essere prodotte le seguenti queries:
+- Il totale reti segnate da ciascun calciatore ordinate in
+modo decrescente.
+- Chi ha segnato in una specifica partita.
+- Il totale reti segnate nelle singole partite.
+
+
+CREATE TABLE Calciatori (
+   ID_Calciatori INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   nome VARCHAR(30) NOT NULL,
+   cognome VARCHAR(30) NOT NULL,
+   n_maglia INT(2) NOT NULL
+);
+
+CREATE TABLE Partite (
+   ID_Partite INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   partita VARCHAR(30) NOT NULL,
+   n_reti INT(2) NOT NULL,
+   ID_Calciatori INT NOT NULL
+);
+
+INSERT INTO Calciatori
+(ID_Calciatori, nome, cognome, n_maglia) 
+VALUES 
+(1,"Ciro","Immobile",17),      
+(2,"Romelu","Lukaku",90),      
+(3,"Tammy","Abraham",9),      
+(4,"Victor","Osimhen",9),      
+(5,"Olivier","Giroud",9)
+
+INSERT INTO Partite
+(ID_Calciatori, partita, n_reti) 
+VALUES 
+(1,"Lazio-Fiorentina",1),      
+(2,"Inter-Roma",2),      
+(1,"Napoli-Lazio",2),      
+(5,"Napoli-Milan",1),      
+(5,"Inter-Milan",1),      
+(3,"Inter-Roma",1),      
+(2,"Roma-Inter",1),      
+(5,"Milan-Inter",1),      
+(3,"Roma-Lazio",2),      
+(3,"Roma-Inter",1),      
+(4,"Sampdoria-Napoli",1),      
+(4,"Napoli-Lazio",1),      
+(2,"Inter-Milan",1)
+
+SELECT Calciatori.nome, Calciatori.cognome, SUM(Partite.n_reti) AS totale 
+FROM Partite
+INNER JOIN Calciatori ON Partite.ID_Calciatori=Calciatori.ID_Calciatori 
+GROUP BY Calciatori.ID_Calciatori 
+ORDER BY totale DESC
+
+SELECT Partite.partita, Calciatori.nome, Calciatori.cognome, Partite.n_reti  
+FROM Partite
+INNER JOIN Calciatori ON Partite.ID_Calciatori=Calciatori.ID_Calciatori 
+WHERE Partite.partita="Inter-Milan"
+      
+SELECT Partite.partita, SUM(Partite.n_reti) AS totale_reti 
+FROM Partite
+INNER JOIN Calciatori ON Partite.ID_Calciatori=Calciatori.ID_Calciatori 
+GROUP BY Partite.partita 
+
+
+
+
+
+ 

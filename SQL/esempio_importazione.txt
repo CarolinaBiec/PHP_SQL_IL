@@ -1,7 +1,7 @@
 CREATE TABLE Fornitori (
    ID_Forn INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    Nome VARCHAR(20) NOT NULL,
-   Sconto INT(2) NOT NULL);
+   Sconto INT(10) NOT NULL);
 
 LOAD DATA INFILE "fornitori.txt"
    INTO TABLE Fornitori
@@ -11,3 +11,27 @@ LOAD DATA INFILE "fornitori.txt"
    LINES 
    TERMINATED BY '\r\n'
    (ID_Forn, Nome, Sconto);
+
+CREATE TABLE Articoli (
+   ID_Arti INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   Codice VARCHAR(20) NOT NULL,
+   Tipo CHAR(1) NOT NULL,
+   Prezzo INT(10) NOT NULL,
+   ID_Forn INT(10) NOT NULL);
+
+LOAD DATA INFILE "articoli.txt"
+   INTO TABLE Articoli
+   FIELDS
+   TERMINATED BY ','
+   ENCLOSED BY '"'
+   LINES 
+   TERMINATED BY '\r\n'
+   (ID_Arti, Codice, Tipo, Prezzo, ID_Forn)
+
+
+
+
+
+
+
+

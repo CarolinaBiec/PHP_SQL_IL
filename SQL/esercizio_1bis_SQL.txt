@@ -1,0 +1,87 @@
+
+Simulare la gestione di corse di taxi.
+Di ogni taxi si conosce la targa che lo identifica.
+Per ogni corsa si conosce il numero di km e l'importo.
+Ogni corsa si considera proveniente e destinata da e verso 
+uno dei quartieri di Torino.
+Vallette
+Barriera
+Lingotto
+Lesna
+Vittoria
+Crocetta
+
+Occorre inserire anche dei dati adeguati per testare 
+le richieste.
+
+- Conoscere tutte le corse di uno specifico taxi.
+- Conoscere tutte le corse da un quartiere ad un altro 
+  quartiere indicati dal richiedente.
+- Conoscere tutte le corse con importo compreso 
+  tra 20 e 40 euro.
+- Conoscere tutte le corse che sono costate meno di 
+  5 euro a km.
+
+------------------
+
+CREATE DATABASE taxi2;
+
+USE taxi2;
+
+CREATE TABLE Veicoli (
+ID_Veicoli INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+targa CHAR(7) NOT NULL
+);
+
+CREATE TABLE Corse (
+ID_Corse INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+partenza VARCHAR(30) NOT NULL,
+arrivo VARCHAR(30) NOT NULL,
+importo numeric(6,2) NOT NULL,
+km numeric(5,2) NOT NULL,
+ID_Veicoli INT NOT NULL
+);
+
+INSERT INTO Veicoli 
+(ID_Veicoli,targa) 
+VALUES 
+(1,'FD567EE'),
+(2,'EF641EL');
+
+INSERT INTO Veicoli 
+(ID_Veicoli,targa) 
+VALUES 
+(3,'GA234EF');
+
+INSERT INTO Corse 
+(ID_Veicoli,partenza,arrivo,importo,km) 
+VALUES 
+(1,'Lesna','Lingotto',21.67,8.45),
+(2,'Vallette','Barriera',56.78,9.45),
+(2,'Lesna','Crocetta',45.78,5.45),
+(1,'Lingotto','Barriera',31.67,10.45),
+(2,'Vallette','Barriera',45.67,13.45),
+(1,'Lesna','Crocetta',31.67,4.45);
+
+SELECT Veicoli.targa,Corse.partenza,Corse.arrivo,Corse.km,Corse.importo 
+FROM Corse
+INNER JOIN Veicoli ON Corse.ID_Veicoli=Veicoli.ID_Veicoli  
+WHERE Veicoli.targa='FD567EE';
+
+SELECT Veicoli.targa,Corse.partenza,Corse.arrivo,Corse.km,Corse.importo 
+FROM Corse
+INNER JOIN Veicoli ON Corse.ID_Veicoli=Veicoli.ID_Veicoli 
+WHERE Corse.partenza='Lesna' AND Corse.arrivo='Crocetta';
+
+SELECT Veicoli.targa,Corse.partenza,Corse.arrivo,Corse.km,Corse.importo 
+FROM Corse
+INNER JOIN Veicoli ON Corse.ID_Veicoli=Veicoli.ID_Veicoli 
+WHERE Corse.importo>=20 AND Corse.importo<=40;
+
+SELECT Veicoli.targa,Corse.partenza,Corse.arrivo,Corse.km,Corse.importo 
+FROM Corse
+INNER JOIN Veicoli ON Corse.ID_Veicoli=Veicoli.ID_Veicoli 
+WHERE (Corse.importo/Corse.km)<5;
+
+
+

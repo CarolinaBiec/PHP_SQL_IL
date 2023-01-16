@@ -1,0 +1,66 @@
+
+-- 21/02/2019 
+
+Simulare la gestione di corse di taxi.
+Di ogni taxi si conosce la targa che lo identifica.
+Per ogni corsa si conosce il numero di km e l'importo.
+Ogni corsa si considera proveniente e destinata da e verso 
+uno dei quartieri di Torino.
+Vallette
+Barriera
+Lingotto
+Lesna
+Vittoria
+Crocetta
+
+Occorre inserire anche dei dati adeguati per testare 
+le richieste.
+
+- Conoscere tutte le corse di uno specifico taxi.
+- Conoscere tutte le corse da un quartiere ad un altro 
+  quartiere indicati dal richiedente.
+- Conoscere tutte le corse con importo compreso 
+  tra 20 e 40 euro.
+- Conoscere tutte le corse che sono costate meno di 
+  5 euro a km.
+
+------------------
+
+CREATE DATABASE taxi;
+
+USE taxi;
+
+CREATE TABLE corse (
+targa CHAR(7) NOT NULL,
+partenza VARCHAR(30) NOT NULL,
+arrivo VARCHAR(30) NOT NULL,
+importo numeric(6,2) NOT NULL,
+km numeric(5,2) NOT NULL
+);
+
+INSERT INTO corse 
+(targa,partenza,arrivo,importo,km) 
+VALUES 
+('FD567EE','Lesna','Lingotto',21.67,8.45),
+('EF641EL','Vallette','Barriera',56.78,9.45),
+('EF641EL','Lesna','Crocetta',45.78,5.45),
+('FD567EE','Lingotto','Barriera',31.67,10.45),
+('EF641EL','Vallette','Barriera',45.67,13.45),
+('FD567EE','Lesna','Crocetta',31.67,4.45);
+
+SELECT * FROM corse 
+WHERE targa='FD567EE';
+
+SELECT * FROM corse 
+WHERE partenza='Lesna' AND arrivo='Crocetta';
+
+SELECT * FROM corse 
+WHERE partenza='Lesna' OR arrivo='Crocetta';
+
+SELECT * FROM corse 
+WHERE importo>=20 AND importo<=40;
+
+SELECT * FROM corse 
+WHERE (importo/km)<5;
+
+
