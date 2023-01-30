@@ -1,0 +1,30 @@
+
+// Database: spese_agenti
+
+CREATE TABLE Voci (
+   ID_Voci INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   descrizione VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Agenti (
+   ID_Agenti INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   username VARCHAR(30) NOT NULL,
+   password VARCHAR(30) NOT NULL,
+   nome VARCHAR(30) NOT NULL,
+   cognome VARCHAR(30) NOT NULL,
+   CF CHAR(16) NOT NULL,
+   livello INT(1) NOT NULL
+);
+
+CREATE TABLE Spese (
+   ID_Spese INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   ID_Voci INT NOT NULL,
+   ID_Agenti INT NOT NULL,  
+   importo NUMERIC(6,2) NOT NULL,
+   dataspesa DATETIME NOT NULL,
+   liquidato BOOLEAN
+);
+   
+INSERT INTO Agenti (ID_Agenti,username,password,livello)
+VALUES (1,'admin','pippo',2);
+

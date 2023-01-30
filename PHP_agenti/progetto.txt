@@ -1,0 +1,12 @@
+Realizzazione di una piattaforma
+per la gestione dei rimborsi
+ad agenti.
+
+-Gestione tabella agenti.
+-Gestione tabella voci di spesa.
+-Inserimento spese.
+-Liquidazione spese.
+Statistiche:
+
+
+
