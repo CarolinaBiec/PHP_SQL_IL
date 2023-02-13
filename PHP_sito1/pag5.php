@@ -31,6 +31,19 @@
 
 ?>
 
+<SCRIPT language='JavaScript'>
+function test() {
+	esito=true; 
+	username=document.F1.NU.value;
+	username=username.trim();
+	if(username=="") {
+		esito=false;
+		alert("username mancante");
+	}	
+	return(esito);
+}	
+</SCRIPT>
+
 <HTML>
    <HEAD>
    <STYLE type='text/css'>
@@ -45,7 +58,7 @@
    <H2>REGISTRAZIONE</H2> 
    <BR><BR>
 
-   <FORM name='F1' method='post' action='pag5.php'>
+   <FORM name='F1' method='post' action='pag5.php' onSubmit='return test();'>
       username:<INPUT type='text' name='NU' size='4' value=''><BR>
       password:<INPUT type='text' name='NP' size='4' value=''><BR>
       nome:<INPUT type='text' name='NN' size='6' value=''><BR>
