@@ -1,0 +1,19 @@
+
+// database utenti
+
+CREATE TABLE Utenti (
+   ID_Utenti INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   user VARCHAR(30) NOT NULL,
+   passw VARCHAR(20) NOT NULL,
+   nome VARCHAR(30) NOT NULL, 
+   cognome VARCHAR(30) NOT NULL,
+   liv int(2) NOT NULL
+);
+
+INSERT INTO Utenti 
+(user,passw,nome,cognome,liv) 
+VALUES
+('gianni','abcd','Gianni','Rossi',2),
+('mpaiola','xyz','Marco','Paiola',1),
+('verdig','1234','Giuseppe','Verdi',1);
+   
