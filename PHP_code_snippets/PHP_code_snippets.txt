@@ -1,0 +1,136 @@
+
+<?php
+   // azzeramento variabili di sessione
+   
+   session_start();
+   $_SESSION['liv']=0;
+   $_SESSION['user']="";
+   $_SESSION['nome']="ospite";
+   $_SESSION['cognome']="";
+   $_SESSION['ID']=0;
+?>
+
+<?php
+   // connessione e selezione del database in uso
+   
+   $mysqli = new mysqli("localhost", "root", "", "utenti");
+   if ($mysqli->connect_errno) {
+      echo "non si connette: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+   }
+?>
+
+<?php
+   // esecuzione di una stringa di query e ottenimento di un recordset
+
+   $query = "SELECT * FROM Utenti"; 
+   if (!$risultato = $mysqli->query($query)) {
+	  echo $query;
+   }
+?>
+
+<?php
+   // intercettazione di un bottone premuto
+
+   if(isset($_POST['B']))
+   {
+   
+    // ...... 
+   
+   }
+?>   
+
+<?php
+   // passaggio vincolato a sessione
+
+   if($_SESSION['liv']>=1)
+   {	   
+   
+    // ...... 
+   
+   } 
+   else 
+   {	   
+      echo "Non puoi accedere al contenuto di questa pagina";
+   }
+?>
+
+<?php
+   // visualizzazione di un recordset generico con una tabella HTML
+   
+   echo "<TABLE border='1'>";
+   echo "<TR>";
+   for($i=0;$i<$risultato->field_count;$i++)
+   {
+      echo "<TD><B>".$risultato->fetch_field_direct($i)->name."</B></TD>";
+   }
+   echo "</TR>";
+   while ($row=$risultato->fetch_row()) 
+   {
+      echo "<TR>";
+      for($i=0;$i<$risultato->field_count;$i++)
+      {
+         echo "<TD>".$row[$i]."</TD>";
+      }
+      echo "</TR>";
+   }
+   echo "</TABLE>";
+?>
+
+<?php
+   // query e generazione di un oggetto select HTML  
+
+   $queryT = "SELECT ID_Utenti,cognome,nome FROM Utenti"; 
+   if (!$risultatoT = $mysqli->query($queryT)) {
+	  echo $queryT;
+   }
+
+   foreach($risultatoT as $record)
+   {
+	  if($record['ID_Utenti']==$quale)	  
+  	     echo "<OPTION value=".$record['ID_Utenti']." SELECTED>".$record['nome']." ".$record['cognome']."</OPTION>";     
+	  else
+	     echo "<OPTION value=".$record['ID_Utenti'].">".$record['nome']." ".$record['cognome']."</OPTION>";     
+   }
+?>
+
+<?php
+   // esempio di query raggruppata con subtotali 
+
+   if(isset($_POST['TS'])) {
+      $query = "";
+      $query = $query."SELECT Utenti.cognome,Utenti.nome,SUM(Spese.importo) AS Totale_Spese "; 
+      $query = $query."FROM Spese ";
+      $query = $query."RIGHT JOIN Utenti ON Spese.ID_Utenti=Utenti.ID_Utenti ";
+      $query = $query."GROUP BY Utenti.cognome,Utenti.nome";
+      if (!$risultato = $mysqli->query($query)) {
+	     echo $query;
+      }
+   }
+?>
+
+<?php
+   // esempio di query di inserimento
+
+   if(isset($_POST['NB']))
+   {
+      $user=($_POST['NU']);
+	  $passw=($_POST['NP']);
+	  $nome=($_POST['NN']);
+      $cognome=($_POST['NC']);
+	  $liv=1;
+	  
+	  $query="INSERT INTO Utenti ";
+      $query=$query."(user,passw,nome,cognome,liv) ";
+      $query=$query."VALUES ";
+      $query=$query."('".$user."','".$passw."','".$nome."','".$cognome."',".$liv.")";
+
+      if (!$risultato = $mysqli->query($query)) {
+	      echo $query;
+      }
+	  else
+	  {
+          echo "Nuovo utente ".$user." inserito<BR><BR>"; 		  
+	  }	  
+   }
+?>
+

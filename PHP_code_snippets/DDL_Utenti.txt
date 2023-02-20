@@ -1,0 +1,47 @@
+
+// database utenti
+
+CREATE TABLE Utenti (
+   ID_Utenti INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   user VARCHAR(30) NOT NULL,
+   passw VARCHAR(20) NOT NULL,
+   nome VARCHAR(30) NOT NULL, 
+   cognome VARCHAR(30) NOT NULL,
+   liv int(2) NOT NULL
+);
+
+INSERT INTO Utenti 
+(user,passw,nome,cognome,liv) 
+VALUES
+('gianni','abcd','Gianni','Rossi',2),
+('mpaiola','xyz','Marco','Paiola',1),
+('verdig','1234','Giuseppe','Verdi',1);
+   
+CREATE TABLE Spese (
+   ID_Spese INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   ID_Utenti INT NOT NULL,
+   dataspesa DATE NOT NULL,
+   importo NUMERIC(6,2) NOT NULL,
+   descrizione VARCHAR(50)
+);
+
+INSERT INTO Spese 
+(ID_Utenti,dataspesa,importo,descrizione)
+VALUES
+(2,20230204,45.50,'pranzo'),
+(2,20230205,60.00,'carburante'),
+(1,20230204,100.00,'hotel')
+;
+
+SELECT Utenti.cognome,Utenti.nome,Spese.dataspesa,Spese.importo,Spese.descrizione 
+FROM Spese
+INNER JOIN Utenti ON Spese.ID_Utenti=Utenti.ID_Utenti
+WHERE Utenti.ID_Utenti=2;
+
+SELECT Utenti.cognome,Utenti.nome,Spese.dataspesa,Spese.importo,Spese.descrizione 
+FROM Spese
+INNER JOIN Utenti ON Spese.ID_Utenti=Utenti.ID_Utenti
+ORDER BY Utenti.cognome,Utenti.nome;
+
+
+
