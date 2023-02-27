@@ -1,0 +1,38 @@
+
+CREATE DATABASE sondaggio;
+
+USE sondaggio;
+
+CREATE TABLE utenti (
+ID_utenti INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(30) NOT NULL,
+password VARCHAR(15) NOT NULL,
+votato int NOT NULL
+);
+
+INSERT INTO utenti (username,password,votato) VALUES ('a','1',0);
+INSERT INTO utenti (username,password,votato) VALUES ('b','2',0);
+INSERT INTO utenti (username,password,votato) VALUES ('c','3',0);
+INSERT INTO utenti (username,password,votato) VALUES ('d','4',0);
+INSERT INTO utenti (username,password,votato) VALUES ('e','5',0);
+INSERT INTO utenti (username,password,votato) VALUES ('f','6',0);
+INSERT INTO utenti (username,password,votato) VALUES ('g','7',0);
+INSERT INTO utenti (username,password,votato) VALUES ('h','8',0);
+INSERT INTO utenti (username,password,votato) VALUES ('i','9',0);
+INSERT INTO utenti (username,password,votato) VALUES ('l','10',0);
+
+CREATE TABLE giocatori (
+ID_giocatori INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(30) NOT NULL,
+cognome VARCHAR(30) NOT NULL,
+voti int NOT NULL
+);
+
+INSERT INTO giocatori (nome,cognome,voti) VALUES ('Karim','Benzema',0);
+INSERT INTO giocatori (nome,cognome,voti) VALUES ('Erling','Haaland',0);
+INSERT INTO giocatori (nome,cognome,voti) VALUES ('Tammy','Abraham',0);
+INSERT INTO giocatori (nome,cognome,voti) VALUES ('Victor','Osimhen',0);
+INSERT INTO giocatori (nome,cognome,voti) VALUES ('Lautaro','Martinez',0);
+
+
+ 
